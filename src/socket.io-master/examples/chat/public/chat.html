@@ -1,0 +1,50 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>X-Connect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul class="pages">
+        <li class="chat page">
+            <div class="chatArea">
+                <ul class="pages" style="float:left;width:30%;">
+                    <li>
+                        <div>
+                            <ul class="organizationusers"></ul>
+                        </div>
+                    </li>
+                </ul>
+                <!--<ul class="messages" style="float:right;width:30%;"></ul>-->
+            </div>
+            <!--<input class="inputMessage" placeholder="Type here..." />-->
+        </li>
+        <li class="login page">
+            <div class="form">
+                <h3 class="title">User Name</h3>
+                <input class="usernameInput" id="usernameInput" type="text" maxlength="50" />
+                <h3 class="title">Password</h3>
+                <input class="usernameInput" id="userpassword" type="password" maxlength="50" />
+            </div>
+        </li>
+    </ul>
+
+
+    <!--<div class="chatwindow" style="display:none;">
+        
+    </div>-->
+    <ul class="pages chatwindow">
+        <li class="chat page">
+            <div class="chatArea">
+                <ul class="messages" style="float:right;width:30%;"></ul>
+            </div>
+            <input class="inputMessage" placeholder="Type here..." />
+        </li>
+    </ul>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
+</body>
+</html>
