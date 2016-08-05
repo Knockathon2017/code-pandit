@@ -37,9 +37,15 @@ $(function () {
     }
 
     // Sets the client's username
-    function setUsername() {
-        username = cleanInput($usernameInput.val().trim());
-        upassword = cleanInput($password.val().trim());
+    function setUsername(uname, pswd) {
+        if (!uname && !username) {
+            username = cleanInput($usernameInput.val().trim());
+            upassword = cleanInput($password.val().trim());
+        }
+        else {
+            username = uname;
+            upassword = pswd;
+        }
         // If the username is valid
         if (username && upassword) {
             $loginPage.fadeOut();
@@ -106,10 +112,10 @@ $(function () {
 
     // Available Users list
     function populateUsersList(data) {
-        var $usernameDiv = $('<span id="userspan_' + data.id + '" class="username"/>')
+        var $usernameDiv = $('<a href="chat.html"><span id="userspan_' + data.id + '" class="username"/></a>')
           .text(data.first_name + data.last_name)
           .css('color', getUsernameColor(data.first_name + data.last_name));
-        var $messageBodyDiv = $('<span class="messageBody">')
+        var $messageBodyDiv = $('<span style="display:none;" class="messageBody">')
           .text(data.email);
 
         var typingClass = '';
@@ -117,7 +123,8 @@ $(function () {
           .data('username', data.first_name + data.last_name)
           .addClass(typingClass)
           .append($usernameDiv, $messageBodyDiv);
-        $messages = $availableUsers;
+        if ($availableUsers.length > 0)
+            $messages = $availableUsers;
         addMessageElement($messageDiv);
     }
 
@@ -261,27 +268,33 @@ $(function () {
         //var usrs = data;
 
         //socket.emit('getUsersList');
-        $.ajax({
-            url: "http://xconnect.com:3131/api/users",
-            success: function (data) {
-                //$availableUsers = data;
-                for (var i = 0; i < data.length; i++) {
-                    populateUsersList(data[i]);
+        if ($availableUsers.length > 0) {
+            $.ajax({
+                url: "http://xconnect.com:3131/api/users",
+                success: function (data) {
+                    //$availableUsers = data;
+                    for (var i = 0; i < data.length; i++) {
+                        populateUsersList(data[i]);
+                    }
+
+                    //$("[id^='userspan_']").off("click").on("click", function () {
+                    //    //window.open('http://localhost:3000/', 'window name', 'window settings').dialog();;
+                    //    $(this).redirect('public/chat.html');
+                    //    //var w = window.open();
+                    //    //var html = $chatWindow.html();
+                    //    //$(w.document.body).html(html);
+                    //    //$chatWindow.dialog();
+                    //    //username = $(this).text();
+                    //    //upassword = "12345678";
+                    //    //socket.emit('add user', username, upassword);
+                    //});
                 }
-
-                $("[id^='userspan_']").off("click").on("click", function () {
-                    //window.open('http://localhost:3000/', 'window name', 'window settings').dialog();;
-
-                    var w = window.open();
-                    var html = $chatWindow.html();
-                    $(w.document.body).html(html);
-                    //$chatWindow.dialog();
-                    //username = $(this).text();
-                    //upassword = "12345678";
-                    //socket.emit('add user', username, upassword);
-                });
-            }
-        });
+            });
+        }
+        else {
+            //addMessageElement($messageDiv);
+            setUsername('kaushik', '1234568');
+        }
     });
     socket.on('getUsersListClient', function (data) {
         var avlblUsers = data;
