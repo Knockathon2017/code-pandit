@@ -30,8 +30,8 @@ app.get('/',function(request,response){
 	response.send('TypTap sample authentication API.');
 });
 apiRouter.post('/auth',function(request,response){
-	var username = request.username;
-	var password=request.password;
+	var username = request.body.username;
+	var password=request.body.password;
 	var validUser=user.validate(username,password,function(validUser){
 		if(validUser==''){
 			response.json({success:false,message:'UserName/Password is not valid.'});
@@ -67,7 +67,7 @@ apiRouter.get('/users',function(request,response){
 	});
 });
 apiRouter.post('/signout',function(request,response){
-	var token = request.token;
+	var token = request.body.token;
 	if(token){
 		jwt.verify(token,app.get('secret'),function(error,jsonToken){
 			if(error)
