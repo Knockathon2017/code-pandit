@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var jwt = require('jsonwebtoken');
 var config=require('./config');
 var user = require('./users');
+var update = require('./update');
 var port=3131;
 app.set('secret',config.secret);
 var apiRouter = express.Router();
@@ -16,8 +17,14 @@ app.all('/*', function(req, res, next) {
   next();
 });
 
-apiRouter.get('/',function(request,response){
-	response.json({message:'TypTap sample authentication API.'});
+apiRouter.post('/updates',function(request,response){
+	var userId = request.body.userid;
+	var lastId = request.body.lastid;
+	var newLogin = request.body.newlogin;
+
+	update.getLatestUpdate(lastId,userId,newLogin,function(rows){
+		response.json(rows);
+	});
 });
 app.get('/',function(request,response){
 	response.send('TypTap sample authentication API.');
