@@ -271,7 +271,7 @@ $(function () {
             type: "POST",
             data: { username: username, password: upassword },
             dataType: "json",
-            url: "http://xconnect.com:3131/api/auth",
+            url: "http://localhost:3131/api/auth",
             success: function (data) {
                 if (data.success && data.token) {
                     $.ajax({
@@ -281,9 +281,27 @@ $(function () {
                                 populateUsersList(data[i]);
                             }
                             $("[id^='userspan_']").off("click").on("click", function () {
-                                $isOpenWindow = true;
-                                $chatWindow.dialog();
-                                socket.emit('add user', $(this).parent().find("[id^='usernamespan_']").text(), "12345678");
+                               var str =$(this).attr('id');
+                               var ret = str.split("_");
+                               var str1 = ret[0];
+                               var str2 = ret[1]
+							   if(str2=='undefined')
+							   {
+							     $.ajax({
+								            type: "POST",
+                                            data: { username: username, password: upassword },
+                                            dataType: "json",                                           
+                                            url: "http://localhost:3131/api/createWorkkards",
+                                           success: function (data) {
+                                              console.log("created workkard");
+                                         }
+							      });
+							   }
+							   else{
+							         $isOpenWindow = true;
+                                     $chatWindow.dialog();
+                                     socket.emit('add user', $(this).parent().find("[id^='usernamespan_']").text(), "12345678");
+								}
                             });
                         }
                     });

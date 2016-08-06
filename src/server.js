@@ -5,6 +5,7 @@ var jwt = require('jsonwebtoken');
 var config=require('./config');
 var user = require('./users');
 var update = require('./update');
+var createWorkkard=require('./createWorkkards');
 var port=3131;
 app.set('secret',config.secret);
 var apiRouter = express.Router();
@@ -26,9 +27,19 @@ apiRouter.post('/updates',function(request,response){
 		response.json(rows);
 	});
 });
+
+apiRouter.post('/createWorkkards',function(request,response){
+	var userId = request.body.username;
+	console.log('hit it');
+	createWorkkard.createNewWorkkard(userId ,function(){
+		response.json({message:'workkard created'});
+	});
+});
+
 app.get('/',function(request,response){
 	response.send('TypTap sample authentication API.');
 });
+
 apiRouter.post('/auth',function(request,response){
 	var username = request.body.username;
 	var password=request.body.password;
