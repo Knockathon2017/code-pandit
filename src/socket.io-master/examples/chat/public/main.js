@@ -25,6 +25,7 @@ $(function () {
     var lastTypingTime;
     var $currentInput = $usernameInput.focus();
     var socket = io();
+    var $isOpenWindow = false;
 
     function addParticipantsMessage(data) {
         var message = '';
@@ -38,11 +39,11 @@ $(function () {
 
     // Sets the client's username
     function setUsername(uname, pswd) {
-        if (!uname && !username) {
+        if ($usernameInput.val() && $password.val()) {
             username = cleanInput($usernameInput.val().trim());
             upassword = cleanInput($password.val().trim());
         }
-        else {
+        else if (uname && pswd) {
             username = uname;
             upassword = pswd;
         }
@@ -112,15 +113,15 @@ $(function () {
 
     // Available Users list
     function populateUsersList(data) {
-        var $usernameDiv = $('<a href="chat.html"><span id="userspan_' + data.id + '" class="username"/></a>')
+        var $usernameDiv = $('<span id="userspan_' + data.id + '" class="username"/>')
           .text(data.first_name + data.last_name)
-          .css('color', getUsernameColor(data.first_name + data.last_name));
+          .css('color', getUsernameColor(data.first_name + ' ' + data.last_name));
         var $messageBodyDiv = $('<span style="display:none;" class="messageBody">')
           .text(data.email);
 
         var typingClass = '';
         var $messageDiv = $('<li class="message"/>')
-          .data('username', data.first_name + data.last_name)
+          .data('username', data.first_name + ' ' + data.last_name)
           .addClass(typingClass)
           .append($usernameDiv, $messageBodyDiv);
         if ($availableUsers.length > 0)
@@ -149,7 +150,9 @@ $(function () {
     //   all other messages (default = false)
     function addMessageElement(el, options) {
         var $el = $(el);
-
+        if ($messages.length == 0) {
+            return;
+        }
         // Setup default options
         if (!options) {
             options = {};
@@ -261,6 +264,42 @@ $(function () {
         log(message, {
             prepend: true
         });
+        $.ajax({
+            url: "http://xconnect.com:3131/api/users",
+            success: function (data) {
+                //$availableUsers = data;
+                for (var i = 0; i < data.length; i++) {
+                    populateUsersList(data[i]);
+                }
+
+                //$("[id^='userspan_']").off("click").on("click", function () {
+                //    //window.open('http://localhost:3000/', 'window name', 'window settings').dialog();;
+                //    $(this).redirect('public/chat.html');
+                //    //var w = window.open();
+                //    //var html = $chatWindow.html();
+                //    //$(w.document.body).html(html);
+                //    //$chatWindow.dialog();
+                //    //username = $(this).text();
+                //    //upassword = "12345678";
+                //    //socket.emit('add user', username, upassword);
+                //});
+                $("[id^='userspan_']").off("click").on("click", function () {
+                    $isOpenWindow = true;
+                    //username = $(this).text();
+                    //upassword = "12345678";
+                    //var win = window.open('chat.html', 'window name', 'window settings');
+                    //$(win.document).ready(function () {
+                    //    var message = "X-Connect";
+                    //    log(message, {
+                    //        prepend: true
+                    //    });
+                    //});
+                    $chatWindow.dialog();
+                });
+
+                
+            }
+        });
         addParticipantsMessage(data);
     });
 
@@ -268,34 +307,18 @@ $(function () {
         //var usrs = data;
 
         //socket.emit('getUsersList');
-        if ($availableUsers.length > 0) {
-            $.ajax({
-                url: "http://xconnect.com:3131/api/users",
-                success: function (data) {
-                    //$availableUsers = data;
-                    for (var i = 0; i < data.length; i++) {
-                        populateUsersList(data[i]);
-                    }
-
-                    //$("[id^='userspan_']").off("click").on("click", function () {
-                    //    //window.open('http://localhost:3000/', 'window name', 'window settings').dialog();;
-                    //    $(this).redirect('public/chat.html');
-                    //    //var w = window.open();
-                    //    //var html = $chatWindow.html();
-                    //    //$(w.document.body).html(html);
-                    //    //$chatWindow.dialog();
-                    //    //username = $(this).text();
-                    //    //upassword = "12345678";
-                    //    //socket.emit('add user', username, upassword);
-                    //});
-                }
-            });
-        }
-        else {
-            //addMessageElement($messageDiv);
-            setUsername('kaushik', '1234568');
-        }
+        //if ($availableUsers.length > 0 && username) {
+            
+        //}
+        //else {
+        //    //addMessageElement($messageDiv);
+        //    //setUsername('kaushik', '1234568');
+        //}
     });
+
+
+
+
     socket.on('getUsersListClient', function (data) {
         var avlblUsers = data;
     });
@@ -312,9 +335,11 @@ $(function () {
 
     // Whenever the server emits 'user left', log it in the chat body
     socket.on('user left', function (data) {
-        log(data.username + ' left');
-        addParticipantsMessage(data);
-        removeChatTyping(data);
+        if (!$isOpenWindow) {
+            log(data.username + ' left');
+            addParticipantsMessage(data);
+            removeChatTyping(data);
+        }
     });
 
     // Whenever the server emits 'typing', show the typing message
