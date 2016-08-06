@@ -1,6 +1,8 @@
 /* Fix user-agent */
 
 * {
+  margin: 0px;
+  padding: 0px;
   box-sizing: border-box;
 }
 
@@ -31,75 +33,14 @@ ul {
   word-wrap: break-word;
 }
 
-/* Pages */
-
-.pages {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-.page {
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}
-
-/* Login Page */
-
-.login.page {
-  background-color: #000;
-}
-
-.login.page .form {
-  height: 100px;
-  margin-top: -100px;
-  position: absolute;
-
-  text-align: center;
-  top: 50%;
-  width: 100%;
-}
-
-.login.page .form .usernameInput {
-  background-color: transparent;
-  border: none;
-  border-bottom: 2px solid #fff;
-  outline: none;
-  padding-bottom: 15px;
-  text-align: center;
-  width: 400px;
-}
-
-.login.page .title {
-  font-size: 200%;
-}
-
-.login.page .usernameInput {
-  font-size: 200%;
-  letter-spacing: 3px;
-}
-
-.login.page .title, .login.page .usernameInput {
-  color: #fff;
-  font-weight: 100;
+.clr {
+    clear: both;
 }
 
 /* Chat page */
 
 .chat.page {
   display: none;
-}
-
-/* Font */
-
-.messages {
-  font-size: 150%;
-}
-
-.inputMessage {
-  font-size: 100%;
 }
 
 .log {
@@ -127,13 +68,6 @@ ul {
   color: gray;
 }
 
-.username {
-  font-weight: 700;
-  overflow: hidden;
-  padding-right: 15px;
-  text-align: right;
-}
-
 /* Input */
 
 .inputMessage {
@@ -147,3 +81,87 @@ ul {
   right: 0;
   width: 100%;
 }
+
+
+.main_wrapper {
+    width: 860px;
+    margin: 0 auto;
+}
+
+.main_wrapper .header {
+    float: left;
+    width: 100%;
+    display: block;
+    background-color: #505050;
+    padding: 5px 10px;
+}
+
+.main_wrapper .middle_ctr {
+    float: left;
+    width: 100%;
+    display: block;
+}
+
+.main_wrapper.intro .middle_ctr {
+    padding: 80px 50px;
+    text-align: center;
+}
+
+.login_page_form {
+    width: 480px;
+    margin: 0 auto;
+    padding: 100px 0;
+    text-align: center;
+}
+
+.login_page_form input[type="text"],
+.login_page_form input[type="password"] {
+    float: left;
+    width: 100%;
+    display: block;
+    border: none;
+    border-bottom: 1px solid #eaeaea;
+    padding: 10px 20px;
+    margin-bottom: 50px;
+    font-size: 18px;
+    outline: none;
+}
+
+.login_page_form input[type="text"]:focus,
+.login_page_form input[type="password"]:focus {
+    border-bottom: 1px solid #1a99db;
+}
+
+.organizationusers {
+    float: left;
+    width: 100%;
+    display: block;
+}
+
+.organizationusers li {
+    float: left;
+    width: 100%;
+    display: block;
+    padding: 5px 10px;
+}
+
+.organizationusers li .username {
+    float: left;
+    width: 100%;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.organizationusers li .messageBody {
+    float: left;
+    width: 100%;
+    display: block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+
+
