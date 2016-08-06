@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,5 +66,29 @@
     <link href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" rel="stylesheet">
     <script src="/socket.io/socket.io.js"></script>
     <script src="/main.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+        var index=0;
+        var lastId=0;
+        setInterval(function(){
+            var nlogin=index==0?true:false;
+            $.ajax({
+                url: "http://localhost:3131/api/updates",
+                dataType:"json",
+                type:"post",
+                data:{userid:25,lastid:lastId,newlogin:nlogin},
+                success:function(rows){
+                    if(rows.length>0){
+                        if(index>0)
+                            $(".activity_updates_ctr").append(JSON.stringify(rows));
+                        lastId=rows[0].id;
+                    }
+                }
+            });
+            index++;
+        },5000);
+        });
+
+    </script>
 </body>
 </html>
