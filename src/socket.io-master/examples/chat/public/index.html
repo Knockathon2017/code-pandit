@@ -7,26 +7,34 @@
 </head>
 <body>
     
-    <div class="main_wrapper">
+    <div class="main_wrapper login page">
         <div class="header">
             <img src="logo.png">
         </div>
         <div class="middle_ctr">
-        <div class="chat page">
-            <div class="chatArea">
-                <ul class="organizationusers"></ul>
-                <!--<ul class="messages" style="float:right;width:30%;"></ul>-->
-            </div>
-            <!--<input class="inputMessage" placeholder="Type here..." />-->
-        </div>
-        <div class="login page">
             <div class="form login_page_form">
                 <input class="usernameInput" id="usernameInput" type="text" placeholder="Username" maxlength="50" />
                 <div class="clr"></div>
                 <input class="usernameInput" id="userpassword" placeholder="Password" type="password" maxlength="50" />
                 <a href="#"><img src="sign_in_btn_small.png"></a>
             </div>
+        
         </div>
+    </div>
+    
+    <div class="main_wrapper chat page">
+        <div class="header">
+            <img src="logo.png">
+        </div>
+        <div class="middle_ctr">
+            <div class="chatArea">
+                <ul class="organizationusers"></ul>
+                <div class="activity_updates_ctr">
+                    
+                </div>
+                <!--<ul class="messages" style="float:right;width:30%;"></ul>-->
+            </div>
+            <!--<input class="inputMessage" placeholder="Type here..." />-->
         <div class="pages chatwindow" style="display:none;">
         <li>
             <div class="chatArea">
@@ -85,6 +93,7 @@
     </ul>-->
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+    <link href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css" rel="stylesheet">
     <script src="/socket.io/socket.io.js"></script>
     <script src="/main.js"></script>
 </body>
