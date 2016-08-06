@@ -116,10 +116,9 @@ $(function () {
     // Available Users list
     function populateUsersList(data) {
         var $usernameDiv = $('<span id="userspan_' + data.id + '" class="username"/>')
-          .text(data.first_name + ' ' + data.last_name)
-          .css('color', getUsernameColor(data.first_name + ' ' + data.last_name));
-        var $messageBodyDiv = $('<span id="usernamespan_' + data.id + '" style="display:none;" class="messageBody">')
-          .text(data.user_name);
+          .text(data.first_name + data.last_name);
+        var $messageBodyDiv = $('<span style="display:none;" class="messageBody">')
+          .text(data.email);
 
         var typingClass = '';
         var $messageDiv = $('<li class="message"/>')
