@@ -33,6 +33,11 @@ ul {
   word-wrap: break-word;
 }
 
+a {
+    color: #0288D1;
+    text-decoration: none;
+}
+
 .clr {
     clear: both;
 }
@@ -198,5 +203,167 @@ ul {
     width: 100%;
 }
 
+.activity_updates_ctr {
+    position: absolute;
+    right: 0;
+    left: 25%;
+    bottom: 0;
+    top: 67px;
+    padding: 25px;
+}
 
+.activity_updates_list {
+	float: left;
+	margin: 0 0 0 0;
+	width:100%;
+	display: block;
+}
+.activity_updates_list li {
+	float: left;
+	width: 100%;
+	display: block;
+	position: relative;
+    margin:0 0 10px 4px;
+    padding: 15px 5px;
+    border-bottom: 1px solid #ccc;
+}
+.activity_updates_list li:last-child {
+	border-bottom: none;
+}
+.activity_updates_list li.new_features {
+    background-color: #ebfefa;
+    border:#d4ece7 solid 1px;
+    border-width: 2px 1px 1px 2px
+}
+.activity_updates_list li.new_features .user_desc .user_summary {
+    padding-left: 0px;
+}
+.activity_updates_list li .activity_type {
+	background-color: #008730;
+	color: #fff;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 0 3px 0 3px;
+    margin-left: 3px;
+    text-transform: uppercase;
+    right: 7px;
+    top: 7px;
+    position: absolute;
+    font-size:11px;
+    font-weight:bold;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.activity_updates_list li .private {
+	background-color: #44b649;
+}.activity_updates_list li .community {
+	background-color: #44b649;
+}
+.activity_updates_list li .public {
+	background-color: #008b89;
+}
+.activity_updates_list li .notification {
+	background-color: #2f93fa;
+}
+
+.activity_updates_list li .user_desc a.hasTooltip {
+	float: left;
+}
+.activity_updates_list li .user_desc, 
+.activity_updates_list li .workkard_info {
+	float: left;
+	width: 100%;
+    min-height:19px;
+	display: block;
+	padding: 0 0 4px 0;
+}
+
+.activity_updates_list li .workkard_info {
+	padding: 0 0 8px 0;
+}
+
+.activity_updates_list li .user_desc .user_thumb,
+.activity_updates_list li .workkard_info .wk_ico {
+	width: 34px;
+	height: 34px;
+	float: left;
+}
+
+.activity_updates_list li .workkard_info .wk_ico {
+	border-radius: 17px;
+    background-color: #f39c12;
+    color: #fff;
+    text-align: center;
+    line-height: 34px;
+    font-weight: bold;
+}
+
+.activity_updates_list li .user_desc .user_summary,
+.activity_updates_list li .workkard_info .wk_info_summary {
+	padding: 0px 0 0 10px;
+    float: left;
+}
+
+.activity_updates_list li .user_desc .user_summary .name,
+.activity_updates_list li .workkard_info .wk_info_summary .wk_num {
+	display: block;
+	color: #000;
+	text-transform: capitalize;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight:bold;
+}
+
+.activity_updates_list li .workkard_info .wk_info_summary .wk_num {
+	display: inline-block;
+	width: auto;
+    vertical-align: middle;
+    color: #f39c12;
+}
+
+.activity_updates_list li .user_desc .user_summary .organization,
+.activity_updates_list li .workkard_info .wk_info_summary .wk_owner {
+	display: block;
+	color: #999;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.activity_updates_list li .workkard_info .wk_info_summary .wk_owner,
+.activity_updates_list li .workkard_info .wk_info_summary .wk_owner a {
+	color: #999;
+}
+
+.activity_updates_list li .wk_update_ct {
+	background-color: #5F90F1;
+	color: #fff;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 0 3px 0 3px;
+    margin-left: 8px;
+    font-size:11px;
+    font-weight:bold;
+    display: inline-block;
+}
+.activity_updates_list li .activity_desc {
+	float: left;
+	width: 100%;
+	display: block;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	-ms-text-overflow:ellipsis;
+	-o-text-overflow:ellipsis;
+}
+
+.activity_updates_list li .activity_desc .date {
+	float: left;
+	width: 100%;
+	display: block;
+	color: #666;
+    margin-top:10px;
+}
 
