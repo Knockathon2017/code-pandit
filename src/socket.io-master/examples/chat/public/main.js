@@ -263,7 +263,7 @@ $(function () {
     socket.on('login', function (data) {
         connected = true;
         // Display the welcome message
-        var message = "X-Connect";
+        var message = "";
         log(message, {
             prepend: true
         });
@@ -275,7 +275,7 @@ $(function () {
             success: function (data) {
                 if (data.success && data.token) {
                     $.ajax({
-                        url: "http://xconnect.com:3131/api/users",
+                        url: "http://localhost:3131/api/users",
                         success: function (data) {
                             for (var i = 0; i < data.length; i++) {
                                 populateUsersList(data[i]);
@@ -283,7 +283,6 @@ $(function () {
                             $("[id^='userspan_']").off("click").on("click", function () {
                                 $isOpenWindow = true;
                                 $chatWindow.dialog();
-                                //setUsername($(this).text(), "12345678");
                                 socket.emit('add user', $(this).parent().find("[id^='usernamespan_']").text(), "12345678");
                             });
                         }
@@ -293,22 +292,6 @@ $(function () {
             }
         });
     });
-
-    $window.on('load', function () {
-        //var usrs = data;
-
-        //socket.emit('getUsersList');
-        //if ($availableUsers.length > 0 && username) {
-            
-        //}
-        //else {
-        //    //addMessageElement($messageDiv);
-        //    //setUsername('kaushik', '1234568');
-        //}
-    });
-
-
-
 
     socket.on('getUsersListClient', function (data) {
         var avlblUsers = data;
